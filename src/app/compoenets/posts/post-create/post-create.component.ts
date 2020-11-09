@@ -1,4 +1,6 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {NgForm} from "@angular/forms";
+
 import { Post } from '../../posts/post.model';
 
 @Component({
@@ -20,10 +22,15 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddPost() {
+  onAddPost(form: NgForm) {
+  console.log(form)
+    if (form.invalid){
+      return;
+    }
+
     const post: Post = {
-      title: this.enteredTitle,
-      content: this.enteredContent
+      title: form.value.title,
+      content: form.value.content,
     };
 
     // this is a way to propagate the post value
